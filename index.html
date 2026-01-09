@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xertica - Geração de Demanda (Justiça & Legal)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Paleta Brand 50 - Foco Institucional/Legal */
+            --brand-cyan-50: #00BEFF;
+            --brand-green-50: #C0FF7D;
+            --brand-pink-50: #FF89FF;
+            
+            /* Backgrounds */
+            --bg-dark: #0a1014;
+            --bg-card: rgba(19, 27, 34, 0.90);
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            
+            /* Gradientes */
+            --grad-cyan-green: linear-gradient(135deg, #00BEFF 0%, #C0FF7D 100%);
+            --grad-green-pink: linear-gradient(135deg, #C0FF7D 0%, #FF89FF 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, rgba(0, 190, 255, 0.05) 0%, transparent 70%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; font-weight: 700; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Cabeçalho */
+        header {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 40px; width: auto; }
+
+        .status-badge {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            background: rgba(0, 190, 255, 0.15);
+            border: 1px solid var(--brand-cyan-50);
+            border-radius: 4px;
+            color: var(--brand-cyan-50);
+            font-weight: 600;
+        }
+
+        /* Secção Hero */
+        .hero { padding: 80px 0; text-align: center; }
+
+        .strategy-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--bg-dark);
+            background: var(--brand-cyan-50);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(0, 190, 255, 0.3);
+        }
+
+        .hero h1 { font-size: clamp(2.2rem, 8vw, 3.8rem); margin-bottom: 10px; line-height: 1.1; }
+        .hero h1 span {
+            background: var(--grad-cyan-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-white);
+            margin-bottom: 30px;
+            font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Exibição de Cadência */
+        .cadence-display {
+            display: inline-flex;
+            gap: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .cadence-item { display: flex; align-items: center; color: #ccc; font-size: 0.9rem; }
+        .cadence-item i { margin-right: 8px; color: var(--brand-green-50); }
+
+        /* Secções e Layout */
+        section { padding: 70px 0; }
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .section-title { font-size: 2.3rem; margin-bottom: 15px; display: inline-block; position: relative; }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 4px;
+            background: var(--brand-cyan-50); margin: 15px auto 0; border-radius: 2px;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+        /* Itens da Cronologia */
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 50px;
+            bottom: -30px;
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+            z-index: 0;
+        }
+        .timeline-item:last-child::before { display: none; }
+        
+        .date-badge {
+            width: 50px;
+            height: 50px;
+            background: #1a1f24;
+            border: 1px solid var(--brand-cyan-50);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 1;
+            font-weight: bold;
+            color: var(--brand-cyan-50);
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+        .date-badge span { font-size: 1rem; }
+        
+        .timeline-content {
+            flex-grow: 1;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .timeline-content:hover { background: rgba(255,255,255,0.06); border-color: var(--brand-green-50); }
+        
+        .timeline-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .tag-lp { background: rgba(0, 190, 255, 0.2); color: var(--brand-cyan-50); }
+        .tag-onepage { background: rgba(192, 255, 125, 0.2); color: #8bc34a; }
+        .tag-pod { background: rgba(255, 137, 255, 0.2); color: var(--brand-pink-50); }
+        .tag-whitepaper { background: var(--grad-cyan-green); color: #000; }
+        .tag-quiz { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* Lista de Conteúdo */
+        .content-list-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        .content-list-item i { width: 25px; color: var(--brand-cyan-50); }
+
+        /* KPIs */
+        .kpi-box {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .kpi-box:hover { background: rgba(255,255,255,0.05); }
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 10px 0;
+            background: var(--grad-cyan-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .kpi-label { color: #fff; font-size: 0.9rem; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
+
+        /* Caixa de Lead Scoring */
+        .lead-score-box {
+            background: linear-gradient(135deg, rgba(0, 190, 255, 0.1) 0%, rgba(192, 255, 125, 0.1) 100%);
+            border: 1px solid var(--brand-cyan-50);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .text-gradient {
+            background: var(--grad-cyan-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://storage.googleapis.com/etp-bucket/Logos%20Xertica.ai%20%28.png%29/xertica.ai/Copy%20of%20Logo_XERTICA_white.png" alt="Xertica.ai Logo" onerror="this.src='https://placehold.co/150x50/000000/FFFFFF/png?text=Xertica+Logo'">
+            </div>
+            <div class="status-badge">Calendário Editorial • Justiça 2026</div>
+        </header>
+    </div>
+
+    <!-- Secção Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="strategy-badge">Legal Tech & Digital Justice</div>
+
+            <h1>Demanda para o Setor da <span class="text-gradient">Justiça</span></h1>
+            <p class="hero-subtitle">Estratégias para Tribunais e Departamentos Jurídicos: Celeridade, Inteligência Documental e Ética Digital.</p>
+
+            <div class="cadence-display">
+                <div class="cadence-item"><i class="fa-solid fa-scale-balanced"></i> Plano: <strong>Modernização 2026</strong></div>
+                <div class="cadence-item"><i class="fa-solid fa-file-shield"></i> Foco: <strong>Análise de Peças & Precedentes</strong></div>
+                <div class="cadence-item"><i class="fa-solid fa-gavel"></i> Tecnologia: <strong>IA Generativa Jurídica</strong></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estratégia e Cronograma Justiça -->
+    <section>
+        <div class="container">
+            <div class="grid-2">
+                
+                <!-- Coluna Esquerda: Mecânicas Jurídicas -->
+                <div>
+                    <h3 style="color: var(--brand-cyan-50); margin-bottom: 20px;">Trilhas de Conversão</h3>
+                    <p style="color: #ccc; margin-bottom: 25px;">
+                        Abordagens focadas na redução de acervos processuais e na otimização da redação jurídica através de Agentes de IA seguros.
+                    </p>
+                    
+                    <div class="content-list-item"><i class="fa-solid fa-file-waveform"></i> LP: IA na Redação de Pareceres e Sentenças</div>
+                    <div class="content-list-item"><i class="fa-solid fa-shield-halved"></i> One Page: Governança e LGPD no Judiciário</div>
+                    <div class="content-list-item"><i class="fa-solid fa-brain"></i> Podcast: O Futuro do Juiz na Era da IA</div>
+                    <div class="content-list-item"><i class="fa-solid fa-chart-line"></i> Whitepaper: Redução de 40% no Tempo de Análise</div>
+                    <div class="content-list-item"><i class="fa-solid fa-list-check"></i> Quiz: Maturidade Digital do seu Tribunal/Escritório</div>
+                </div>
+
+                <!-- Coluna Direita: Cronograma Editorial Atualizado -->
+                <div>
+                    <h3 style="color: var(--brand-green-50); margin-bottom: 20px;">Calendário de Lançamentos</h3>
+                    
+                    <!-- 15/01 -->
+                    <div class="timeline-item">
+                        <div class="date-badge">15<span>JAN</span></div>
+                        <div class="timeline-content">
+                            <span class="timeline-tag tag-lp">Landing Page • Relatório</span>
+                            <strong style="display:block; color:white; font-size: 1.05rem;">Tendências de IA para 2026</strong>
+                            <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">
+                                Guia para CIOs: O que esperar da GenAI e da Nuvem. Foco em captação de leads via landing page.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 30/01 -->
+                    <div class="timeline-item">
+                        <div class="date-badge">30<span>JAN</span></div>
+                        <div class="timeline-content" style="border-left: 3px solid var(--brand-cyan-50);">
+                            <span class="timeline-tag tag-onepage">Análise Técnica</span>
+                            <strong style="display:block; color:white; font-size: 1.05rem;">IA na Triagem Processual</strong>
+                            <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">
+                                Como acelerar a entrada de novos casos e otimizar o fluxo de triagem inicial.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 15/02 -->
+                    <div class="timeline-item">
+                        <div class="date-badge">15<span>FEV</span></div>
+                        <div class="timeline-content">
+                            <span class="timeline-tag tag-pod">Podcast • E-mail Marketing</span>
+                            <strong style="display:block; color:white; font-size: 1.05rem;">Segurança e Governança na Era dos Agentes</strong>
+                            <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">
+                                Distribuição via e-mail marketing utilizando cortes estratégicos do podcast sobre governança de agentes de IA.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 28/02 -->
+                    <div class="timeline-item">
+                        <div class="date-badge">28<span>FEV</span></div>
+                        <div class="timeline-content" style="border-left: 3px solid var(--brand-green-50);">
+                            <span class="timeline-tag tag-whitepaper">Whitepaper • Case de Sucesso</span>
+                            <strong style="display:block; color:white; font-size: 1.05rem;">Redução de 90% no Tempo de Análise</strong>
+                            <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">
+                                Case TJES: Descubra como transformamos a análise de audiências com inteligência artificial.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 15/05 -->
+                    <div class="timeline-item">
+                        <div class="date-badge">15<span>MAI</span></div>
+                        <div class="timeline-content" style="border: 1px solid var(--brand-pink-50);">
+                            <span class="timeline-tag tag-quiz">Ferramenta Interativa</span>
+                            <strong style="display:block; color:white; font-size: 1.05rem;">IA na Eficiência Jurídica</strong>
+                            <p style="font-size: 0.9rem; color: #aaa; margin-top: 5px;">
+                                Quiz interativo: Qual o impacto real da IA na eficiência da sua operação jurídica hoje?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPIs de Sucesso -->
+    <section style="background: rgba(0,0,0,0.3);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">KPIs de Sucesso</h2>
+                <p class="section-desc">Benchmarks B2B e metas de conversão para o setor da justiça.</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- Click Rate -->
+                <div class="kpi-box">
+                    <i class="fa-solid fa-hand-pointer" style="font-size: 1.2rem; color: var(--brand-cyan-50); margin-bottom: 10px;"></i>
+                    <div class="kpi-label">Click Rate</div>
+                    <div class="kpi-value">> 10%</div>
+                    <p style="font-size: 0.8rem; color: #ccc;">Taxa de Clique (Benchmark B2B)</p>
+                </div>
+
+                <!-- Objetivo Final -->
+                <div class="kpi-box" style="border-color: var(--brand-green-50);">
+                    <i class="fa-solid fa-calendar-check" style="font-size: 1.2rem; color: var(--brand-green-50); margin-bottom: 10px;"></i>
+                    <div class="kpi-label">Objetivo Final</div>
+                    <div class="kpi-value">10%</div>
+                    <p style="font-size: 0.8rem; color: #ccc;">Conversão em Reunião (Leads Nutridos)</p>
+                </div>
+
+                <!-- Qualificação -->
+                <div class="kpi-box">
+                    <i class="fa-solid fa-filter-circle-check" style="font-size: 1.2rem; color: var(--brand-pink-50); margin-bottom: 10px;"></i>
+                    <div class="kpi-label">Qualificação</div>
+                    <div class="kpi-value">MQL</div>
+                    <p style="font-size: 0.8rem; color: #ccc;">Leads Qualificados pelo Marketing</p>
+                </div>
+            </div>
+
+            <!-- Regra de Passagem -->
+            <div class="lead-score-box">
+                <h4 style="color: var(--brand-cyan-50); margin-bottom: 10px;"><i class="fa-solid fa-bullseye"></i> Regra de Passagem (Justiça)</h4>
+                <p style="color: #ddd; font-size: 0.95rem;">
+                    O atingimento do status de <strong>MQL</strong> é automatizado via Lead Scoring, priorizando leads que interagem com o <strong>Whitepaper de Redução de Falhas</strong> ou a <strong>Calculadora de ROI</strong> para o time de vendas (SDR).
+                </p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
